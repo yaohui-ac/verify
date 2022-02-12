@@ -10,8 +10,8 @@ public:
     foo(){ cout << "func(empty)\n"; }
     foo(int x1) { cout << "func = foo(x1)\n";}
     foo(int x1, int x2) { cout << "func = foo(x1, x2)\n"; }
-    foo(int x1, int x2, int x3) { cout << "func = foo(x1, x2, x3)\n"; }
-    foo(initializer_list<int> it) { cout << "func = foo(init_list)\n"; }
+    explicit foo(int x1, int x2, int x3) { cout << "func = foo(x1, x2, x3)\n"; }
+    foo(initializer_list<int> it) { cout << "func = foo(init_list) size: "<< it.size() << " \n"; }
 };
 template<typename T>
 void printlist(initializer_list<T> inlist) {
@@ -26,12 +26,16 @@ void verify0() {
     foo c(1,2);
     foo d{1,2};
     foo e = {1,2};
+    foo f = {1,2,3}; //14行删除后,这里会报错 匹配不到 foo(x1,x2,x3)
+    foo g(1,2,3);
     /*
     func(empty)
     func(empty)
     func = foo(x1, x2)
-    func = foo(init_list)
-    func = foo(init_list)
+    func = foo(init_list) size: 2 
+    func = foo(init_list) size: 2 
+    func = foo(init_list) size: 3 
+    func = foo(x1, x2, x3)
     */
 }
 void verify1() {
