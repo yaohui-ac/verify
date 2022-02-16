@@ -17,12 +17,12 @@ public:
     son()=default;
     son(son&)=default;
     void f1(){cout << "hhhc\n";}
-    //virtual void f2() {cout << "virtual f2\n";}//未删除的函数重写已删除的 函数
-    //virtual void f3() {cout << "virtual f3\n";} //可以重写,但本质是虚类
+    //virtual void f2() {cout << "virtual f2\n";}//未删除的函数重写已删除的 函数 error
+    //virtual void f3() override{cout << "virtual f3\n";} //不重写本质是虚类,且无法重写
    
 };
 void verify0() {
-    //son s1;
+   // son s1; 无法实例化
     //无法引用 "son" 的默认构造函数 -- 它是已删除的函数
     //son s1;
     // son s2(s1);

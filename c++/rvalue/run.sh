@@ -1,5 +1,5 @@
 # !/bin/bash
-g++ $1
+g++ -std=c++17 $1
 if [ $? -ne 0 ] # 如果上一条指令有问题
 then
     echo "shell: error! exited"
